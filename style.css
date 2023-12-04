@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the height to 100% of the viewport height */
+    position: relative;
+  }
+
+
+.search, .info {
+    position: absolute;
+    width: 50%; /* Adjust the width as needed */
+    height: 50%; /* Adjust the height as needed */
+  }
+  
+.search {
+    z-index: 1; /* Place div1 above div2 */
+  }
+
+.info {
+    z-index: 0;
+}
+  
+  /* Your styles for div1 and div2 */
+  
