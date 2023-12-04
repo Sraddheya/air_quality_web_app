@@ -2,19 +2,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Set the height to 100% of the viewport height */
+    height: 100vh;
     position: relative;
+    background-color: black;
+    opacity: 70%;
   }
 
 
 .search, .info {
     position: absolute;
-    width: 50%; /* Adjust the width as needed */
-    height: 50%; /* Adjust the height as needed */
+    width: 50%; 
+    height: 50%; 
   }
   
 .search {
-    z-index: 1; /* Place div1 above div2 */
+    z-index: 1;
   }
 
 .info {
