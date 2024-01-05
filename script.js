@@ -2,11 +2,14 @@ const apiUrlAirQuality = 'https://airquality.googleapis.com/v1/currentConditions
 const apiUrlGeocoding = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const apiKey = YOURKEY;
 
-
+//Default location London
 let locationData = {
-    "latitude": null,
-    "longitude": null
+    "latitude": 51.5072178,
+    "longitude": -0.1275862
 };
+
+fetchAirQuality();
+document.querySelector('.location-text').innerText = "London"
 
 async function getGeocodeData() {
     const address = document.querySelector('.search-input').value;
@@ -64,9 +67,37 @@ async function fetchAirQuality(){
         console.log('AirQuality Data:', data);
         document.querySelector('.aqi-text').innerText = data.indexes[0].aqi
         document.querySelector('.general-rec').innerText = data.healthRecommendations.generalPopulation
-        document.querySelector('.elderly-rec').innerText = data.healthRecommendations.elderly
-        document.querySelector('.children-rec').innerText = data.healthRecommendations.children
+        // document.querySelector('.elderly-rec').innerText = data.healthRecommendations.elderly
+        // document.querySelector('.children-rec').innerText = data.healthRecommendations.children
     } catch (error) {
         console.error('Error fetching air quality data', error);
     }
 }
+
+const circularProgress = document.querySelectorAll(".circular-progress");
+
+Array.from(circularProgress).forEach((progressBar) => {
+  const progressValue = progressBar.querySelector(".percentage");
+  const innerCircle = progressBar.querySelector(".inner-circle");
+  let startValue = 0,
+    endValue = Number(progressBar.getAttribute("data-percentage")),
+    speed = 50,
+    progressColor = progressBar.getAttribute("data-progress-color");
+
+  const progress = setInterval(() => {
+    startValue++;
+    progressValue.textContent = `${startValue}%`;
+    progressValue.style.color = `${progressColor}`;
+
+    innerCircle.style.backgroundColor = `${progressBar.getAttribute(
+      "data-inner-circle-color"
+    )}`;
+
+    progressBar.style.background = `conic-gradient(${progressColor} ${
+      startValue * 3.6
+    }deg,${progressBar.getAttribute("data-bg-color")} 0deg)`;
+    if (startValue === endValue) {
+      clearInterval(progress);
+    }
+  }, speed);
+});

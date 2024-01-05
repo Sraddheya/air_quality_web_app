@@ -1,49 +1,91 @@
+body {
+  background-color: #36454F;
+  opacity: 0.5;
+}
+
 .card{
   display: flex;
   width: 60vw;
+  height: 80vh;
+  margin-top: 10vh;
+  margin-left: 20vw;
+  padding: 30px 30px 30px 30px;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: black;
-  opacity: 50%;
-}
-
-
-/* body {
-    background-color: black;
-    opacity: 30%;
-} */
-
-/* .card {
-  display: grid;
-  grid-template-rows: 1fr 3fr;
   justify-content: center;
   align-items: center;
-  height: 60vh;
-  width: 60vw;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: rgb(0, 0, 0, 0.5);
+  color: white;
+}
+
+.search-container{
+  display: flex;
+  width: 80%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.search-input{
+  color: black;
+  opacity: 1;
+  font-size: 10pt;
+  width: 80%;
+  border-radius: 10px;
+  padding: 2px 5px 2px 5px;
+  margin: 0px 10px 0px 10px;
+}
+
+.info-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20px 20px 20px;
+}
+
+.aqi-info{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+}
+
+.recommendation-info{
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --progress-bar-width: 200px;
+  --progress-bar-height: 200px;
+  --font-size: 2rem;
+}
+
+.circular-progress {
+  width: var(--progress-bar-width);
+  height: var(--progress-bar-height);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.inner-circle {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: black;
-  opacity: 50%;
-  font: black;
-} */
+  width: calc(var(--progress-bar-width) - 30px);
+  height: calc(var(--progress-bar-height) - 30px);
+  border-radius: 50%;
+  background-color: lightgrey;
+}
 
-/*
-.search, .info {
-    position: absolute;
-    width: 50%; 
-    height: 50%; 
-  }
-  
-.search {
-    z-index: 1;
-  }
-
-.info {
-    z-index: 0;
-} */
-
-  
+.percentage {
+  position: relative;
+  font-size: var(--font-size);
+  color: rgb(0, 0, 0, 0.8);
+}

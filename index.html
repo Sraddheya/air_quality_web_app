@@ -10,6 +10,10 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -17,18 +21,30 @@
     <div class="card">
       <div class="search-container">
         <input type="search" class="search-input" placeholder="City" />
-        <button class="search-button" onclick="getGeocodeData()">Search</button>
+        <button class="search-button" onclick="getGeocodeData()">
+          <i class="fa fa-search"></i>
+        </button>
       </div>
 
       <div class="info-container">
         <div class="aqi-info">
           <h1 class="aqi-text"></h1>
           <h3 class="location-text"></h3>
+          <div
+            class="circular-progress"
+            data-inner-circle-color="lightgrey"
+            data-percentage="80"
+            data-progress-color="crimson"
+            data-bg-color="black"
+          >
+            <div class="inner-circle"></div>
+            <p class="percentage">0%</p>
+          </div>
         </div>
         <div class="recommendation-info">
           <h3 class="general-rec"></h3>
-          <h3 class="elderly-rec"></h3>
-          <h3 class="children-rec"></h3>
+          <!-- <h3 class="elderly-rec"></h3>
+          <h3 class="children-rec"></h3> -->
         </div>
       </div>
     </div>
