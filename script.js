@@ -9,7 +9,7 @@ let locationData = {
 };
 
 async function getGeocodeData() {
-    const address = document.querySelector('.js-input').value;
+    const address = document.querySelector('.search-input').value;
     console.log(address);
 
     try {
@@ -26,6 +26,7 @@ async function getGeocodeData() {
         locationData.latitude = location.lat;
         locationData.longitude = location.lng;
         console.log(locationData);
+        document.querySelector('.location-text').innerText = address
         fetchAirQuality();
       }
   
@@ -61,6 +62,10 @@ async function fetchAirQuality(){
         const data = await response.json();
 
         console.log('AirQuality Data:', data);
+        document.querySelector('.aqi-text').innerText = data.indexes[0].aqi
+        document.querySelector('.general-rec').innerText = data.healthRecommendations.generalPopulation
+        document.querySelector('.elderly-rec').innerText = data.healthRecommendations.elderly
+        document.querySelector('.children-rec').innerText = data.healthRecommendations.children
     } catch (error) {
         console.error('Error fetching air quality data', error);
     }
