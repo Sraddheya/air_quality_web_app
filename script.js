@@ -2,15 +2,24 @@ const apiUrlAirQuality = 'https://airquality.googleapis.com/v1/currentConditions
 const apiUrlGeocoding = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const apiKey = YOURKEY;
 
-//Default location London
-let locationData = {
-    "latitude": 51.5072178,
-    "longitude": -0.1275862
-};
+let airInfo = {
+  aqiLevel: 0,
+  color: "",
+  recGeneral: "",
+  location: {
+    "latitude": 0,
+    "longitude": 0
+  }
+}
 
-fetchAirQuality();
-document.querySelector('.location-text').innerText = "London"
+//Set default city
+document.addEventListener("DOMContentLoaded", function() {
+  const defaultCity = "London";
+  document.querySelector('.search-input').value = defaultCity;
+  getGeocodeData();
+});
 
+//Get geocode data
 async function getGeocodeData() {
     const address = document.querySelector('.search-input').value;
     console.log(address);
@@ -26,9 +35,9 @@ async function getGeocodeData() {
 
       if (data.results.length > 0) {
         const location = data.results[0].geometry.location;
-        locationData.latitude = location.lat;
-        locationData.longitude = location.lng;
-        console.log(locationData);
+        airInfo.location.latitude = location.lat
+        airInfo.location.longitude = location.lng
+        console.log(airInfo.location)
         document.querySelector('.location-text').innerText = address
         fetchAirQuality();
       }
@@ -38,12 +47,12 @@ async function getGeocodeData() {
     }
   }
 
-
+//Fetch air quality data
 async function fetchAirQuality(){
     try {
         const requestData = {
             universalAqi: true,
-            location: locationData,
+            location: airInfo.location,
             extraComputations: [
               "HEALTH_RECOMMENDATIONS"
             ],
@@ -63,41 +72,44 @@ async function fetchAirQuality(){
         }
 
         const data = await response.json();
-
+        airInfo.aqiLevel = data.indexes[0].aqi
+        console.log(airInfo.aqiLevel)
+        airInfo.color = data.indexes[0].color
+        airInfo.recGeneral = data.healthRecommendations.generalPopulation
         console.log('AirQuality Data:', data);
-        document.querySelector('.aqi-text').innerText = data.indexes[0].aqi
-        document.querySelector('.general-rec').innerText = data.healthRecommendations.generalPopulation
-        // document.querySelector('.elderly-rec').innerText = data.healthRecommendations.elderly
-        // document.querySelector('.children-rec').innerText = data.healthRecommendations.children
+        console.log('airInfo:', airInfo);
+        document.querySelector('.aqi-text').innerText = airInfo.aqiLevel
+        document.querySelector('.general-rec').innerText = airInfo.recGeneral
+        setProgressBar();
     } catch (error) {
         console.error('Error fetching air quality data', error);
     }
 }
 
-const circularProgress = document.querySelectorAll(".circular-progress");
-
-Array.from(circularProgress).forEach((progressBar) => {
+function setProgressBar(){
+  const progressBar = document.querySelector(".circular-progress");
   const progressValue = progressBar.querySelector(".percentage");
   const innerCircle = progressBar.querySelector(".inner-circle");
   let startValue = 0,
-    endValue = Number(progressBar.getAttribute("data-percentage")),
+    endValue = airInfo.aqiLevel,
     speed = 50,
-    progressColor = progressBar.getAttribute("data-progress-color");
+    progressColor = "crimson";
 
   const progress = setInterval(() => {
     startValue++;
     progressValue.textContent = `${startValue}%`;
     progressValue.style.color = `${progressColor}`;
+    console.log(endValue)
 
     innerCircle.style.backgroundColor = `${progressBar.getAttribute(
-      "data-inner-circle-color"
+      "white"
     )}`;
 
     progressBar.style.background = `conic-gradient(${progressColor} ${
       startValue * 3.6
-    }deg,${progressBar.getAttribute("data-bg-color")} 0deg)`;
+    }deg,black 0deg)`;
     if (startValue === endValue) {
       clearInterval(progress);
     }
   }, speed);
-});
+}
