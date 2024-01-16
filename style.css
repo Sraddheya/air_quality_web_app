@@ -1,5 +1,8 @@
 body {
   background-color: #36454F;
+  background-size: cover;
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
   opacity: 0.5;
 }
 
