@@ -1,7 +1,7 @@
 const apiUrlAirQuality = 'https://airquality.googleapis.com/v1/currentConditions:lookup?';
 const apiUrlGeocoding = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const apiUrlStaticMap = 'https://maps.googleapis.com/maps/api/staticmap?'
-const apiKey = YOURKEY;
+const apiKey = 'AIzaSyBNYAzDpYkqO4uIccQwW_ZWHm6DwK5Ci2I';
 
 let airInfo = {
   aqiLevel: 0,
