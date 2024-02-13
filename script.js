@@ -39,7 +39,6 @@ async function getGeocodeData() {
         const location = data.results[0].geometry.location;
         airInfo.location.latitude = location.lat;
         airInfo.location.longitude = location.lng;
-        console.log(airInfo.location);
         document.querySelector('.location-text').innerText = `Air Quality in ${address}`;
         fetchAirQuality();
         setMapBackground();
@@ -79,13 +78,9 @@ async function fetchAirQuality(){
         airInfo.recom = data.healthRecommendations.generalPopulation;
         airInfo.category = data.indexes[0].category;
         airInfo.dominant = data.indexes[0].dominantPollutant;
-        console.log('AirQuality Data:', data);
-        console.log('airInfo:', airInfo);
-        //document.querySelector('.aqi-text').innerText = airInfo.aqiLevel;
         document.querySelector('.general-rec').innerText = airInfo.recom;
         document.querySelector('.category').innerText = `Category: ${airInfo.category}`;
         document.querySelector('.dominant').innerText = `Dominant pollutant: ${airInfo.dominant}`;
-        // document.querySelector('.further-rec').innerText = `Further: ${airInfo.recFurther}`;
         setProgressBar();
     } catch (error) {
         console.error('Error fetching air quality data', error);

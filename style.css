@@ -1,8 +1,6 @@
 body {
   background-color: #36454F;
   background-size: cover;
-  /* background-repeat: no-repeat; */
-  /* background-position: center; */
   opacity: 1;
 }
 
@@ -13,6 +11,7 @@ body {
   margin-top: 10vh;
   margin-left: 20vw;
   padding: 30px 30px 30px 30px;
+  border-radius: 15px;
   position: absolute;
   justify-content: center;
   align-items: center;
@@ -87,7 +86,7 @@ body {
   width: calc(var(--progress-bar-width) - 30px);
   height: calc(var(--progress-bar-height) - 30px);
   border-radius: 50%;
-  background-color: lightgrey;
+  background-color: #545454;
 }
 
 .percentage {
