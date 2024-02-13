@@ -7,14 +7,14 @@ A web app to find out the air quality in differnet cities around the world accor
 
 ## Technologies used:
 
-- Google Maps Air Quality API to find out the UAQI of locations: https://developers.google.com/maps/documentation/air-quality?_gl=1*19ofxif*_up*MQ..*_ga*NDY5MjcxNTU2LjE3MDc4MzIzODQ.*_ga_NRWSTWS78N*MTcwNzgzNjAzOC4yLjAuMTcwNzgzNjAzOC4wLjAuMA..
-- Google Maps Geocoding API to convert text name of locations into coorindates: https://developers.google.com/maps/documentation/geocoding?_gl=1*1gnvjui*_up*MQ..*_ga*NDY5MjcxNTU2LjE3MDc4MzIzODQ.*_ga_NRWSTWS78N*MTcwNzgzNjAzOC4yLjAuMTcwNzgzNjAzOC4wLjAuMA..
-- Google Maps Styles to set map of location as background: https://mapstyle.withgoogle.com/
+- [Google Maps Air Quality API](https://developers.google.com/maps/documentation/air-quality?_gl=1*19ofxif*_up*MQ..*_ga*NDY5MjcxNTU2LjE3MDc4MzIzODQ.*_ga_NRWSTWS78N*MTcwNzgzNjAzOC4yLjAuMTcwNzgzNjAzOC4wLjAuMA) to find out the UAQI of locations.
+- [Google Maps Geocoding API](https://developers.google.com/maps/documentation/geocoding?_gl=1*1gnvjui*_up*MQ..*_ga*NDY5MjcxNTU2LjE3MDc4MzIzODQ.*_ga_NRWSTWS78N*MTcwNzgzNjAzOC4yLjAuMTcwNzgzNjAzOC4wLjAuMA) to convert text name of locations into coorindates.
+- [Google Maps Styles](https://mapstyle.withgoogle.com/) to set map of location as background.
 
 ## How to run:
 
-1. npm install dotenv : for using environment variables
-2. Run as live server.
+1. npm install dotenv
+2. Run as live server
 
 ## Credits:
 
