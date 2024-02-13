@@ -5,9 +5,9 @@ const apiKey = 'AIzaSyBNYAzDpYkqO4uIccQwW_ZWHm6DwK5Ci2I';
 
 let airInfo = {
   aqiLevel: 0,
-  color: "",
-  recGeneral: "",
-  recFurther: "",
+  recom: "",
+  category: "",
+  dominant: "",
   location: {
     "latitude": 0,
     "longitude": 0
@@ -37,10 +37,10 @@ async function getGeocodeData() {
 
       if (data.results.length > 0) {
         const location = data.results[0].geometry.location;
-        airInfo.location.latitude = location.lat
-        airInfo.location.longitude = location.lng
-        console.log(airInfo.location)
-        document.querySelector('.location-text').innerText = address
+        airInfo.location.latitude = location.lat;
+        airInfo.location.longitude = location.lng;
+        console.log(airInfo.location);
+        document.querySelector('.location-text').innerText = `Air Quality in ${address}`;
         fetchAirQuality();
         setMapBackground();
       }
@@ -75,16 +75,17 @@ async function fetchAirQuality(){
         }
 
         const data = await response.json();
-        airInfo.aqiLevel = data.indexes[0].aqi
-        console.log(airInfo.aqiLevel)
-        airInfo.color = data.indexes[0].color
-        airInfo.recGeneral = data.healthRecommendations.generalPopulation
-        airInfo.recFurther = data.healthRecommendations.elderly
+        airInfo.aqiLevel = data.indexes[0].aqi;
+        airInfo.recom = data.healthRecommendations.generalPopulation;
+        airInfo.category = data.indexes[0].category;
+        airInfo.dominant = data.indexes[0].dominantPollutant;
         console.log('AirQuality Data:', data);
         console.log('airInfo:', airInfo);
-        //document.querySelector('.aqi-text').innerText = airInfo.aqiLevel
-        document.querySelector('.general-rec').innerText = `General population: ${airInfo.recGeneral}`
-        // document.querySelector('.further-rec').innerText = `Further: ${airInfo.recFurther}`
+        //document.querySelector('.aqi-text').innerText = airInfo.aqiLevel;
+        document.querySelector('.general-rec').innerText = airInfo.recom;
+        document.querySelector('.category').innerText = `Category: ${airInfo.category}`;
+        document.querySelector('.dominant').innerText = `Dominant pollutant: ${airInfo.dominant}`;
+        // document.querySelector('.further-rec').innerText = `Further: ${airInfo.recFurther}`;
         setProgressBar();
     } catch (error) {
         console.error('Error fetching air quality data', error);
@@ -98,7 +99,7 @@ function setProgressBar(){
   let startValue = 0,
     endValue = airInfo.aqiLevel,
     speed = 50,
-    progressColor = "crimson";
+    progressColor = setProgressColor(airInfo.aqiLevel);
 
   const progress = setInterval(() => {
     startValue++;
@@ -119,25 +120,28 @@ function setProgressBar(){
   }, speed);
 }
 
+function setProgressColor(uaqi){
+  if (uaqi === 0){
+    return "#800000";
+  } else if (uaqi < 20) {
+    return "#FF0000";
+  } else if (uaqi < 40) {
+    return "#FF8C00";
+  } else if (uaqi < 60) {
+    return "#FFFF00";
+  } else if (uaqi < 80) {
+    return "#84CF33";
+  } else if (uaqi <= 100){
+    return "#009E3A";
+  }
+}
+
 //Limations on google maps sizes
 async function setMapBackground(){
   try {
-    //document.body.style.backgroundImage = `url('${apiUrlStaticMap}center=${airInfo.location.latitude}, ${airInfo.location.longitude}&zoom=9&size=${window.innerWidth}x${window.innerHeight}&scale=2&key=${apiKey}')`;
-    //style=feature:road.highway%7Celement:geometry%7Cvisibility:simplified%7Ccolor:0xc280e9&style=feature:transit.line%7Cvisibility:simplified%7Ccolor:0xbababa&style=feature:road.highway%7Celement:labels.text.stroke%7Cvisibility:on%7Ccolor:0xb06eba&style=feature:road.highway%7Celement:labels.text.fill%7Cvisibility:on%7Ccolor:0xffffff
-    // [
-    //   {
-    //     "featureType": "all",
-    //     "stylers": [
-    //       { "color": "#C0C0C0" }
-    //     ]
-    
-    //style=featureType:all%7Ccolor:#C0C0C0
-    
-    //https://maps.googleapis.com/maps/api/staticmap?key=YOUR_API_KEY&center=47.65,-122.35&zoom=12&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0xf5f5f5&style=element:labels.icon%7Cvisibility:off&style=element:labels.text.fill%7Ccolor:0x616161&style=element:labels.text.stroke%7Ccolor:0xf5f5f5&style=feature:administrative.land_parcel%7Celement:labels%7Cvisibility:off&style=feature:administrative.land_parcel%7Celement:labels.text.fill%7Ccolor:0xbdbdbd&style=feature:poi%7Celement:geometry%7Ccolor:0xeeeeee&style=feature:poi%7Celement:labels.text%7Cvisibility:off&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:poi.business%7Cvisibility:off&style=feature:poi.park%7Celement:geometry%7Ccolor:0xe5e5e5&style=feature:poi.park%7Celement:labels.text%7Cvisibility:off&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:road%7Celement:geometry%7Ccolor:0xffffff&style=feature:road.arterial%7Celement:labels%7Cvisibility:off&style=feature:road.arterial%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:road.highway%7Celement:geometry%7Ccolor:0xdadada&style=feature:road.highway%7Celement:labels%7Cvisibility:off&style=feature:road.highway%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:road.local%7Cvisibility:off&style=feature:road.local%7Celement:labels%7Cvisibility:off&style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:transit.line%7Celement:geometry%7Ccolor:0xe5e5e5&style=feature:transit.station%7Celement:geometry%7Ccolor:0xeeeeee&style=feature:water%7Celement:geometry%7Ccolor:0xc9c9c9&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&size=480x360
-   
     style = "element:geometry%7Ccolor:0x212121&style=element:labels%7Cvisibility:off&style=element:labels.icon%7Cvisibility:off&style=element:labels.text.fill%7Ccolor:0x757575&style=element:labels.text.stroke%7Ccolor:0x212121&style=feature:administrative%7Celement:geometry%7Ccolor:0x757575&style=feature:administrative.country%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xbdbdbd&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:poi.park%7Celement:geometry%7Ccolor:0x181818&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:poi.park%7Celement:labels.text.stroke%7Ccolor:0x1b1b1b&style=feature:road%7Celement:geometry.fill%7Ccolor:0x2c2c2c&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x8a8a8a&style=feature:road.arterial%7Celement:geometry%7Ccolor:0x373737&style=feature:road.highway%7Celement:geometry%7Ccolor:0x3c3c3c&style=feature:road.highway.controlled_access%7Celement:geometry%7Ccolor:0x4e4e4e&style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:water%7Celement:geometry%7Ccolor:0x000000&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x3d3d3d";
     document.body.style.backgroundImage = `url('${apiUrlStaticMap}center=${airInfo.location.latitude}, ${airInfo.location.longitude}&zoom=10&size=640x340&scale=2&style=${style}&key=${apiKey}')`;
-    console.log(window.innerWidth + " " + window.innerHeight)
+    console.log(window.innerWidth + " " + window.innerHeight);
   } catch (error) {
     console.error('Error setting map background', error);
   }
