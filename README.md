@@ -2,8 +2,8 @@
 
 A web app to find out the air quality in differnet cities around the world accoridng to Googles' Universal Air Quality Index (UAQI). Upon entering the location, users will be informed of general recommendations to stay safe, what the catagory of the UAQI and what the dominant pollutant in the air is.
 
-![Example of air quality in London](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
-![Example of air quality in Kathmandu](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![Example of air quality in London](https://github.com/Sraddheya/air_quality_web_app/blob/main/londonExample.png)
+![Example of air quality in Kathmandu](https://github.com/Sraddheya/air_quality_web_app/blob/main/kathmanduExample.png)
 
 ## Technologies used:
 
