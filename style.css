@@ -32,16 +32,17 @@ body {
 .search-input{
   color: black;
   opacity: 1;
-  font-size: 15pt;
+  font-size: 14pt;
   width: 100%;
   border-radius: 15px;
   margin: 0px 10px 0px 10px;
-  padding: 12px 20px 12px 20px;
+  padding: 12px 18px 12px 18px;
 }
 
 .search-button{
   border-radius: 15px;
   padding: 10px 15px 10px 15px;
+  color: black;
 }
 
 .info-container{
@@ -61,7 +62,7 @@ body {
 .recommendation-info{
   display: flex;
   flex-direction: column;
-  flex-basis: 50%;
+  flex-basis: 60%;
 }
 
 :root {
@@ -77,6 +78,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10px 10px 10px 10px;
 }
 
 .inner-circle {
@@ -89,6 +91,38 @@ body {
 
 .percentage {
   position: relative;
-  font-size: var(--font-size);
+  /* font-size: var(--font-size); */
   color: rgb(0, 0, 0, 0.8);
+}
+
+* {
+  transition: all .2s ease;
+}
+
+.extra-info {
+  display: none;
+  line-height: 30px;
+  font-size: 12px;
+	position: absolute;
+  top: 0;
+  left: 50px;
+}
+
+.info:hover .extra-info {
+  display: block;
+}
+
+.info {
+  font-size: 20px;
+  padding-left: 5px;
+  width: 20px;
+  border-radius: 15px;
+}
+
+.info:hover {
+  color: black;
+  background-color: white;
+  padding: 0 0 0 5px;
+  width: 200px;
+  text-align: left !important;
 }

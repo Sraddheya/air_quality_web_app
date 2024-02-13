@@ -7,6 +7,7 @@ let airInfo = {
   aqiLevel: 0,
   color: "",
   recGeneral: "",
+  recFurther: "",
   location: {
     "latitude": 0,
     "longitude": 0
@@ -78,10 +79,12 @@ async function fetchAirQuality(){
         console.log(airInfo.aqiLevel)
         airInfo.color = data.indexes[0].color
         airInfo.recGeneral = data.healthRecommendations.generalPopulation
+        airInfo.recFurther = data.healthRecommendations.elderly
         console.log('AirQuality Data:', data);
         console.log('airInfo:', airInfo);
-        document.querySelector('.aqi-text').innerText = airInfo.aqiLevel
-        document.querySelector('.general-rec').innerText = airInfo.recGeneral
+        //document.querySelector('.aqi-text').innerText = airInfo.aqiLevel
+        document.querySelector('.general-rec').innerText = `General population: ${airInfo.recGeneral}`
+        // document.querySelector('.further-rec').innerText = `Further: ${airInfo.recFurther}`
         setProgressBar();
     } catch (error) {
         console.error('Error fetching air quality data', error);
@@ -99,7 +102,7 @@ function setProgressBar(){
 
   const progress = setInterval(() => {
     startValue++;
-    progressValue.textContent = `${startValue}%`;
+    progressValue.textContent = `${startValue}`;
     progressValue.style.color = `${progressColor}`;
     console.log(endValue)
 

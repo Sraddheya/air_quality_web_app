@@ -4,3 +4,5 @@ npm install dotenv : for using environment variables
 Circular progress bar: https://dev.to/shubhamtiwari909/circular-progress-bar-css-1bi9
 
 https://mapstyle.withgoogle.com/
+
+More info button: https://codepen.io/EasyBoarder/pen/LZzzjy
